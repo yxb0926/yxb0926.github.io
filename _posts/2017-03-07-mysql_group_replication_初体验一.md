@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL Group Replication 初体验一
-date: 2017-03-01
+date: 2017-03-07
 ---
   mysql 5.7.17版本的发布，标志着Group Replication功能的正式发布。Group Replication的引入是为了提高可用性，保证数据0丢失，多主复制，多点写入。让我们来体验下这个新特性。
 
@@ -50,14 +50,13 @@ my.cnf的配置，除了常规的一些配置外，replication相关的部分需
 启动实例：
 <pre>
 <code>
-  systemctl start mysqld_3308
+systemctl start mysqld_3308
 </code>
 </pre>
 
 登录mysql后创建group replication所需用户：
 <pre>
 <code>
-
 SET SQL_LOG_BIN=0;
 CREATE USER slave@'10.%';
 GRANT REPLICATION SLAVE ON *.* TO slave@'10.%' IDENTIFIED BY 'slave123';
@@ -71,7 +70,6 @@ CHANGE MASTER TO MASTER_USER='slave', MASTER_PASSWORD='slave123' FOR CHANNEL 'gr
 开启group replication
 <pre>
 <code>
-
 # 安装group replication插件
 INSTALL PLUGIN group_replication SONAME 'group_replication.so';
 
@@ -93,11 +91,11 @@ mysql> SELECT * FROM performance_schema.replication_group_members;
 </code>
 </pre>
 
-增加新成员</br>
+增加新成员
+
 增加实例:bbackdb05:3307,配置和刚才bbackdb01:3308 配置基本一致。配置文件部分这里就省略了，需要注意的是loose-group_replication_local_address参数要配置为bbackdb05:33070.直到安装完group replication插件。然后直接执行以下命令：
 <pre>
 <code>
-
 set global group_replication_allow_local_disjoint_gtids_join=ON;
 
 # 启动group replication
@@ -136,8 +134,8 @@ group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，�
 
 
 
+参考资料:
 
-参考资料：</br>
 https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication
