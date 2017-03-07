@@ -1,12 +1,12 @@
 ---
 layout: post
-title: MySQL Group Replication 初体验
-date: 2017-03-07
+title: MySQL Group Replication 初体验一
+date: 2017-03-01
 ---
   mysql 5.7.17版本的发布，标志着Group Replication功能的正式发布。Group Replication的引入是为了提高可用性，保证数据0丢失，多主复制，多点写入。让我们来体验下这个新特性。
 
 ## 环境搭建
-以下将会分别介绍2种情况下的配置方法，即：“全新环境”和“现有传统复制集群”配置的方法。
+搭建组复制一般会有2种情况，即：“全新环境”和“现有传统复制集群”，本篇先介绍全新环境下的配置搭建方法，下文再介绍在现有传统集群基础上进行升级的方法。
 
 ### 全新环境配置
 先安装官方5.7.17版本的mysql，安装方法略过。
@@ -113,6 +113,7 @@ mysql> SELECT * FROM performance_schema.replication_group_members;
 +---------------------------+--------------------------------------+---------------------------+-------------+--------------+
 2 rows in set (0.00 sec)
 
+添加成功，按照以上方法可以添加第三个成员。
 </code>
 </pre>
 
@@ -131,14 +132,12 @@ mysql> SELECT * FROM performance_schema.replication_group_members;
 
 group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，且不是动态参数，所以需要提前考虑。
 
-
-
-### 现有传统复制集群配置Group Replication
+## 功能测试
 
 
 
 
-参考资料：
+参考资料：</br>
 https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication
