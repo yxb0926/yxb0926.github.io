@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL Group Replication 初体验
-date: 2017-03-01
+date: 2017-03-07
 ---
   mysql 5.7.17版本的发布，标志着Group Replication功能的正式发布。Group Replication的引入是为了提高可用性，保证数据0丢失，多主复制，多点写入。让我们来体验下这个新特性。
 
