@@ -26,28 +26,28 @@ my.cnf的配置，除了常规的一些配置外，replication相关的部分需
 以下是开启Group Replication的必要条件。
 <pre>
 <code>
-  gtid_mode=ON  
-  enforce_gtid_consistency=ON
-  master_info_repository=TABLE
-  relay_log_info_repository=TABLE
-  binlog_checksum=NONE
-  log-slave-updates=ON
-  log-bin=/home/mysql/mysql_[port]/logs/mysql-bin
-  binlog-format=ROW
+gtid_mode=ON  
+enforce_gtid_consistency=ON
+master_info_repository=TABLE
+relay_log_info_repository=TABLE
+binlog_checksum=NONE
+log-slave-updates=ON
+log-bin=/home/mysql/mysql_[port]/logs/mysql-bin
+binlog-format=ROW
 </code>
 </pre>
 
 以下是group replication本身的配置：
 <pre>
 <code>
-  transaction_write_set_extraction=XXHASH64
-  loose-group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-  loose-group_replication_start_on_boot=off
-  loose-group_replication_local_address= "10.10.10.51:33080"
-  loose-group_replication_group_seeds= "10.10.10.51:33080,10.10.30.201:33070,10.10.30.207:33060"
-  loose-group_replication_bootstrap_group= off
-  loose-group_replication_single_primary_mode=FALSE
-  loose-group_replication_enforce_update_everywhere_checks= TRUE
+transaction_write_set_extraction=XXHASH64
+loose-group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+loose-group_replication_start_on_boot=off
+loose-group_replication_local_address= "10.10.10.51:33080"
+loose-group_replication_group_seeds= "10.10.10.51:33080,10.10.30.201:33070,10.10.30.207:33060"
+loose-group_replication_bootstrap_group= off
+loose-group_replication_single_primary_mode=FALSE
+loose-group_replication_enforce_update_everywhere_checks= TRUE
 </code>
 </pre>
 
@@ -91,7 +91,6 @@ mysql> SELECT * FROM performance_schema.replication_group_members;
 | group_replication_applier | b89bd4b4-f1ca-11e6-bb62-b82a72ce743a | bbackdb01.niceprivate.com |        3308 | ONLINE       |
 +---------------------------+--------------------------------------+---------------------------+-------------+--------------+
 1 row in set (0.00 sec)
-
 </code>
 </pre>
 
@@ -139,6 +138,7 @@ group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，�
 
 
 参考资料:
+
 https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication
