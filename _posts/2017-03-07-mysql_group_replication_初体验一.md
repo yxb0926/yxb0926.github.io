@@ -11,10 +11,14 @@ date: 2017-03-07
 ### 全新环境配置
 先安装官方5.7.17版本的mysql，安装方法略过。
 为了后面压测性能，我选择了使用3台物理服务器来配置，每台服务器安装一个mysqld实例。  
-- 实例列表
-    + bbackdb01:3308
-    + bbackdb05:3307
-    + bbackdb11:3306
+<pre>
+<code>
+# 实例列表
+bbackdb01:3308
+bbackdb05:3307
+bbackdb11:3306
+</code>
+</pre>
 
 my.cnf的配置，除了常规的一些配置外，replication相关的部分需要注意的一些事情。
 具体参考:http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
@@ -135,7 +139,6 @@ group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，�
 
 
 参考资料:
-
 https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
 http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication
