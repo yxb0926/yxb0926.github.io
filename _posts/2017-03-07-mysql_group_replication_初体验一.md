@@ -3,10 +3,10 @@ layout: post
 title: MySQL Group Replication 初体验一
 date: 2017-03-07
 ---
-  MySQL 5.7.17版本终于GA了，终于可以体验下Group Replication功能了。Group Replication的引入是为了提高可用性，保证数据0丢失。具有多主复制，多点写入的特性。这篇文章我们先开始搭建环境。
+  MySQL 5.7.17版本终于GA了，终于可以体验下Group Replication功能了。Group Replication的引入是为了提高可用性，保证数据0丢失。具有多主复制，多点写入的特性。这篇文章我们先从开始搭建环境。
 
 ## 环境搭建
-搭建组复制一般会有2种情况，即：“全新环境”和“现有传统复制集群”，本篇先介绍全新环境下的配置搭建方法，下文再介绍在现有传统集群基础上进行升级的方法。
+本篇先介绍全新环境下的配置搭建方法，下文再介绍在现有传统集群基础上进行升级的方法。
 
 ### 全新环境配置
 先安装官方5.7.17版本的mysql，安装方法略过。
@@ -127,11 +127,26 @@ mysql> SELECT * FROM performance_schema.replication_group_members;
 2017-03-07T17:49:25.666199+08:00 0 [ERROR] Plugin group_replication reported: '[GCS] Timeout while waiting for the group communication engine to be ready
 !'
 
-
-从主节点的错误日志中才看到这个信息。
+主节点错误日志:
 [Warning] Plugin group_replication reported: '[GCS] Connection attempt from IP address 10.10.30.201 refused. Address is not in the IP whitelist.'
 
 group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，且不是动态参数，所以需要提前考虑。
+
+
+
+<pre>
+<code>
+mysql> select * from performance_schema.replication_group_members;
++---------------------------+--------------------------------------+---------------------------+-------------+--------------+
+| CHANNEL_NAME              | MEMBER_ID                            | MEMBER_HOST               | MEMBER_PORT | MEMBER_STATE |
++---------------------------+--------------------------------------+---------------------------+-------------+--------------+
+| group_replication_applier | 4d469948-f1c6-11e6-b9fc-b82a72ce743a | bbackdb05.niceprivate.com |        3307 | ONLINE       |
+| group_replication_applier | b89bd4b4-f1ca-11e6-bb62-b82a72ce743a | bbackdb01.niceprivate.com |        3308 | ONLINE       |
+| group_replication_applier | f1a6a011-f1a2-11e6-b437-b82a72ce743a | bbackdb11.niceprivate.com |        3306 | ONLINE       |
++---------------------------+--------------------------------------+---------------------------+-------------+--------------+
+3 rows in set (0.00 sec)
+</code>
+</pre>
 
 ## 功能测试
 
@@ -139,6 +154,6 @@ group_replication_ip_whitelist 这个参数如果不指定则值为AUTOMATIC，�
 
 参考资料:
 
-https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html
-http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html
-http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication
+<https://dev.mysql.com/doc/refman/5.7/en/group-replication-adding-instances.html/>
+<http://mysqlhighavailability.com/mysqlha/gr/doc/limitations.html/>
+<http://mysqlhighavailability.com/mysqlha/gr/doc/getting_started.html#group-replication/>
