@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 title: Modernist theme
 description: Modernist is a theme for GitHub Pages.
 show_downloads: true
 google_analytics:
 theme: 
-=======
-name: yxb
-markdown: kramdown
-permalink: /blog/:year/:month/:day/:title
 
-theme: jekyll-theme-modernist
->>>>>>> 9a2865bbc8273796ddc52d53dc542ca64552e1d4
